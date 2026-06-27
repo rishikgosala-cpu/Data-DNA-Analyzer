@@ -1,4 +1,4 @@
-CREATE TABLE "Employee" ()
+CREATE TABLE "Employee" (
     "Education" VARCHAR2(255),
     "JoiningYear" NUMBER,
     "City" VARCHAR2(255),

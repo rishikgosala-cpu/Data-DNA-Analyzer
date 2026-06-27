@@ -1,0 +1,6 @@
+service_name,region,cost,usage_date
+EC2,us-east-1,120.50,2026-06-01
+S3,us-east-1,45.25,2026-06-01
+RDS,ap-south-1,200.00,2026-06-01
+Lambda,ap-south-1,30.75,2026-06-02
+EC2,ap-south-1,150.00,2026-06-02

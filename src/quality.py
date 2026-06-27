@@ -1,142 +1,153 @@
 import pandas as pd
 
-#read the dataset
-dataset_path = "datasets/Employee.csv"
-df = pd.read_csv(dataset_path)
 
-#dATA QUALITY REPORT
-print("=" * 50)
-print("DATA QUALITY REPORT")
-print("=" * 50)
+def quality_analysis(dataset_path):
 
-#Total Rows
-print(f"Total Rows: {len(df)}")
+    df = pd.read_csv(dataset_path)
 
-#Duplicate Rows
-duplicates  = df.duplicated().sum()
-print(f"Duplicate Rows: {duplicates}")
+    report = {}
 
-#Missing Values
-missing = df.isnull().sum().sum()
-print(f"Total Missing Values: {missing}")
+    print("=" * 50)
+    print("DATA QUALITY REPORT")
+    print("=" * 50)
 
-#Data Quality Percentage
-print("\n" + "=" * 50)
-print("DATA QUALITY PERCENTAGE")
-print("=" * 50)
+    total_rows = len(df)
+    duplicates = df.duplicated().sum()
+    missing = df.isnull().sum().sum()
 
-#Calulate Missing Value Percentage
-total_cells = df.shape[0] * df.shape[1]
-missing_percentage = (missing / total_cells) * 100
+    print(f"Total Rows: {total_rows}")
+    print(f"Duplicate Rows: {duplicates}")
+    print(f"Total Missing Values: {missing}")
 
-#Calculate Duplicate Percentage
-duplicate_percentage = (duplicates / len(df)) * 100
 
-print(f"Missing Value Percentage: {missing_percentage:.2f}%")
-print(f"Duplicate Percentage: {duplicate_percentage:.2f}%")
+    total_cells = df.shape[0] * df.shape[1]
 
-#Data Quality Score
-print("\n" + "=" * 50)
-print("DATA QUALITY SCORE")
-print("=" * 50)
+    missing_percentage = (missing / total_cells) * 100
+    duplicate_percentage = (duplicates / total_rows) * 100
 
-# Start with a perfect Score
-quality_score = 100
 
-#Deduct points for missing values
-quality_score -= missing_percentage * 1.5
+    quality_score = 100
 
-#Deduct points for duplicate rows
-quality_score -= duplicate_percentage * 2
+    quality_score -= missing_percentage * 1.5
+    quality_score -= duplicate_percentage * 2
 
-#Keep Score within 0-100 range
-quality_score = max(0, min(100, quality_score))
-print(f"Data Quality Score: {quality_score:.2f}/100")
+    quality_score = max(0, min(100, quality_score))
 
-if quality_score >= 90:
-    print("Data Quality Status: Excellent")
-elif quality_score >= 75:
-    print("Data Quality Status: Good")
-elif quality_score >= 50:
-    print("Data Quality Status: Average")
-else:
-    print("Data Quality Status: Poor")
 
-#OUTLIERS DETECTION
-print("\n" + "=" * 50)
-print("OUTLIERS DETECTION")
-print("=" * 50)
+    print("\nDATA QUALITY SCORE")
+    print(f"Score: {quality_score:.2f}/100")
 
-numeric_columns = df.select_dtypes(include=['number']).columns
 
-for column in numeric_columns:
-    Q1 = df[column].quantile(0.25)
-    Q3 = df[column].quantile(0.75)
-    IQR = Q3 - Q1
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
-    outliers = df[(df[column] < lower_bound) | (df[column] > upper_bound)]
-    print(f"Column: {column}, Outliers Detected: {len(outliers)}")
+    if quality_score >= 90:
+        status = "Excellent"
+    elif quality_score >= 75:
+        status = "Good"
+    elif quality_score >= 50:
+        status = "Average"
+    else:
+        status = "Poor"
 
-#Column-Wise Quality Analysis
-print("\n" + "=" * 50)
-print("COLUMN-WISE QUALITY ANALYSIS")
-print("=" * 50)
 
-for column in df.columns:
-    missing_count = df[column].isnull().sum()
-    missing_percentage = (missing_count / len(df)) * 100
+    print(f"Status: {status}")
 
-    print(f"Column: {column}")
-    print(f"  Missing Values: {missing_count}")
-    print(f"  Missing Percentage: {missing_percentage:.2f}%")
 
-#ADVANCE TRUST SCORE
-print("\n" + "=" * 50)
-print("ADVANCE TRUST SCORE")
-print("=" * 50)
-trust_score = 100
+    print("\nOUTLIERS DETECTION")
 
-#Missing values
-trust_score -= missing_percentage * 1.5
+    total_outliers = 0
 
-#Duplicate rows
-trust_score -= duplicate_percentage * 2
+    numeric_columns = df.select_dtypes(include=['number']).columns
 
-#outliers
-total_outliers = 0
-numeric_columns = df.select_dtypes(include=['number']).columns
-for column in numeric_columns:
-    Q1 = df[column].quantile(0.25)
-    Q3 = df[column].quantile(0.75)
-    IQR = Q3 - Q1
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
-    outliers = df[(df[column] < lower_bound) | (df[column] > upper_bound)]
-    total_outliers += len(outliers)
 
-trust_score -= (total_outliers * 0.2)
-trust_score = max(0, min(100, trust_score))
-print(f"Advance Trust Score: {trust_score:.2f}/100")
+    for column in numeric_columns:
 
-#QUALITY RECOMMENDATIONS
-print("\n" + "=" * 50)
-print("QUALITY RECOMMENDATIONS")
-print("=" * 50)
+        Q1 = df[column].quantile(0.25)
+        Q3 = df[column].quantile(0.75)
 
-if missing > 0:
-    print(f"Fill {missing} missing values.")
-else:
-    print("No missing values detected.")
-if duplicates > 0:
-    print(f"Remove {duplicates} duplicate rows.")
-else:
-    print("No duplicate rows detected.")
-if total_outliers > 0:
-    print(f"Investigate {total_outliers} outlier values.")
-else:
-    print("No outliers detected.")
-if trust_score >= 50:
-    print("Data is Ready for Analysis")
-else:
-    print("Data needs cleaning before analysis.")
+        IQR = Q3 - Q1
+
+        lower = Q1 - 1.5 * IQR
+        upper = Q3 + 1.5 * IQR
+
+        outliers = df[
+            (df[column] < lower) |
+            (df[column] > upper)
+        ]
+
+        total_outliers += len(outliers)
+
+        print(
+            f"{column}: {len(outliers)} outliers"
+        )
+
+
+    trust_score = 100
+
+    trust_score -= missing_percentage * 1.5
+    trust_score -= duplicate_percentage * 2
+    trust_score -= total_outliers * 0.2
+
+    trust_score = max(0, min(100, trust_score))
+
+
+    print("\nADVANCE TRUST SCORE")
+    print(f"Trust Score: {trust_score:.2f}/100")
+
+
+    print("\nQUALITY RECOMMENDATIONS")
+
+
+    recommendations = []
+
+
+    if missing > 0:
+        recommendations.append(
+            f"Fill {missing} missing values"
+        )
+    else:
+        recommendations.append(
+            "No missing values detected"
+        )
+
+
+    if duplicates > 0:
+        recommendations.append(
+            f"Remove {duplicates} duplicate rows"
+        )
+    else:
+        recommendations.append(
+            "No duplicate rows detected"
+        )
+
+
+    if total_outliers > 0:
+        recommendations.append(
+            f"Investigate {total_outliers} outliers"
+        )
+    else:
+        recommendations.append(
+            "No outliers detected"
+        )
+
+
+    for r in recommendations:
+        print(r)
+
+
+    report["quality_score"] = quality_score
+    report["trust_score"] = trust_score
+    report["status"] = status
+    report["outliers"] = total_outliers
+    report["recommendations"] = recommendations
+
+
+    return report
+
+
+
+if __name__ == "__main__":
+
+    path = input("Enter CSV file path: ")
+
+    result = quality_analysis(path)
+
+    print(result)
