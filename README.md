@@ -128,15 +128,20 @@ Demo:
 
 The project supports analyzing multiple types of structured datasets.
 
-The screenshots included in this repository demonstrate the analysis of a sample cloud cost dataset, showcasing the platform's profiling, reporting, visualization, and quality assessment capabilities.
+The screenshots below demonstrate the analysis of a sample cloud cost dataset, showcasing the platform's profiling, reporting, visualization, and quality assessment capabilities.
 
-Example outputs include:
+Cost Trend Analysis:
 
-- Cost Trend Analysis
-- Total Cost by Region
-- Total Cost by Service
-- Data Quality Reports
-- SQL Schema Generation
+![Cost Trend](screenshots/cost_trend.png)
+
+Total Cost by Region:
+
+![Total Cost by Region](screenshots/total_cost_by_region.png)
+
+Total Cost by Service:
+
+![Total Cost by Service](screenshots/total_cost_by_service.png)
+
 
 ---
 
