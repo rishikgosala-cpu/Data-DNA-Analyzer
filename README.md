@@ -1,176 +1,187 @@
-Data-DNA-Analyzer:
+Data-DNA-Analyzer: Intelligent Dataset Fingerprinting & Trust Platform
+
+A Python-based data analysis platform that profiles datasets, evaluates data quality, calculates trust scores, generates SQL schemas, and integrates with Oracle Database for automated data loading and verification.
+
+---
 
 Project Overview:
 
-Data-DNA-Analyzer is a Python-based cloud cost analysis and reporting system that helps analyze cloud resource expenses stored in an Oracle Database. The project automates data ingestion, performs cost analysis, generates visualizations, provides optimization recommendations, and exports summary reports.
+Data-DNA-Analyzer is designed to help analyze structured datasets by automatically generating dataset profiles, assessing data quality, creating trust scores, producing SQL schemas, and generating reports. The platform is dataset-independent and can be used with various CSV datasets such as employee records, sales data, healthcare data, and cloud cost datasets.
 
-The project is designed to demonstrate practical skills in Python, Oracle SQL, Pandas, SQLAlchemy, and data visualization while following a modular software architecture.
+---
 
 Features:
 
-- Import cloud cost data from CSV into Oracle Database
-- Prevent duplicate data insertion
-- Analyze total, average, and service-wise cloud costs
-- Analyze region-wise and date-wise spending
-- Identify the highest cost service and highest spending day
-- Generate cloud cost visualizations using Matplotlib
-- Provide cloud cost optimization recommendations
-- Export detailed and summary reports in CSV format
-- Execute the complete workflow using a single "main.py" file
+- Automated dataset profiling
+- Intelligent dataset fingerprint generation
+- Column-wise statistical analysis
+- Missing value detection
+- Duplicate record detection
+- Outlier detection using the IQR method
+- Data Quality Score calculation
+- Trust Score generation
+- Automated data quality recommendations
+- Automatic SQL schema generation
+- Oracle Database integration
+- Report generation
+- End-to-end execution through a single "main.py"
 
-Technologies Used:
+---
+
+Tech Stack:
 
 - Python
-- Oracle Database (Oracle XE)
-- Oracle SQL
 - Pandas
-- SQLAlchemy
 - Matplotlib
+- Oracle Database (Oracle XE)
+- SQL
 - CSV
 - Git & GitHub
 - Visual Studio Code
+
+---
 
 Project Structure:
 
 Data-DNA-Analyzer/
 │
-├── data/
-│   ├── cloud_cost.csv
-│   └── datasets/
-│
-├── docs/
-├── output/
-│   ├── cost_trend.png
-│   ├── total_cost_by_region.png
-│   ├── total_cost_by_service.png
-│   └── data_dna.db
-│
+├── datasets/
 ├── reports/
-│   ├── cloud_cost_report.csv
-│   └── cloud_cost_summary.csv
-│
 ├── screenshots/
 ├── sql/
 ├── src/
-│   ├── __init__.py
-│   ├── analyzer.py
-│   ├── app.py
-│   ├── cloud_upload.py
-│   ├── database.py
-│   ├── ingestion.py
-│   ├── profiler.py
-│   ├── quality.py
-│   ├── recommendation.py
-│   ├── report.py
-│   ├── sql_generator.py
-│   ├── utils.py
-│   └── visualization.py
-│
-├── tests/
-│   └── test_database.py
-│
-├── .gitignore
-├── LICENSE
 ├── main.py
+├── requirements.txt
 ├── README.md
-└── requirements.txt
+└── LICENSE
 
-Installation:
-
-1. Clone the repository:
-   
-   git clone <repository-url>
-
-2. Navigate to the project folder:
-   
-   cd Data-DNA-Analyzer
-
-3. Create a virtual environment:
-   
-   python -m venv .venv
-
-4. Activate the virtual environment:
-   
-   Windows
-   
-   .venv\Scripts\activate
-
-5. Install the required dependencies:
-   
-   pip install -r requirements.txt
-
-How to Run:
-
-Run the complete application using:
-
-py main.py
-
-The application will automatically:
-
-- Import cloud cost data into Oracle Database
-- Analyze cloud spending
-- Generate visualizations
-- Provide optimization recommendations
-- Export CSV reports
-
-Expected Output
-
-After running the application:
-
-- Cloud cost data is imported into the Oracle Database.
-- Cost analysis is displayed in the terminal.
-- Cost visualization charts are generated in the "output/" folder.
-- Cloud cost reports are generated in the "reports/" folder.
-- Optimization recommendations are displayed based on the analysis.
-
-Future Enhancements
-
-- Develop an interactive dashboard using Streamlit.
-- Support multiple cloud providers (AWS, Azure, and Google Cloud).
-- Enable real-time cloud cost monitoring.
-- Add automated email reports.
-- Integrate predictive cost forecasting using Machine Learning.
-
-Author:
-
-GOSALA RISHIK
-
-B.Tech ,3rd Year ,IT Student | Data Analytics & Cloud Computing Enthusiast
-
-This project was developed to demonstrate practical skills in Python, Oracle SQL, data analysis, visualization, and cloud cost optimization.
-
-
-Screenshots:
-
-Cost by Region:
-
-"Cost by Region" (screenshots/total_cost_by_region.png)
-
-Cost by Service:
-
-"Cost by Service" (screenshots/total_cost_by_service.png)
-
-Cost Trend:
-
-"Cost Trend" (screenshots/cost_trend.png)
+---
 
 Project Workflow:
 
-          CSV File
-              │
-              ▼
-      Data Ingestion
-              │
-              ▼
-     Oracle Database
-              │
-      ┌───────┼────────┐
-      ▼       ▼        ▼
- Analysis  Visualization Recommendation
-      │       │        │
-      └───────┼────────┘
-              ▼
-      Report Generation
-              │
-              ▼
-          CSV Reports
+CSV Dataset
+      │
+      ▼
+Data Ingestion
+      │
+      ▼
+Data Profiling
+      │
+      ▼
+Quality Assessment
+      │
+      ▼
+SQL Schema Generation
+      │
+      ▼
+Oracle Database
+      │
+      ▼
+Reports & Visualizations
+
+---
+
+Installation:
+
+1. Clone the Repository
+
+git clone https://github.com/rishikgosala-cpu/Data-DNA-Analyzer.git
+
+2. Navigate to the Project Folder
+
+cd Data-DNA-Analyzer
+
+3. Create a Virtual Environment
+
+python -m venv .venv
+
+4. Activate the Virtual Environment (Windows)
+
+.venv\Scripts\activate
+
+5. Install the Required Dependencies
+
+pip install -r requirements.txt
+
+---
+
+Run the Project
+
+Run the complete application:
+
+py main.py
+
+The application automatically performs:
+
+- Dataset ingestion
+- Data profiling
+- Data quality assessment
+- SQL schema generation
+- Oracle table creation
+- Data loading
+- Data verification
+- Report generation
+
+---
+
+Demo:
+
+The project supports analyzing multiple types of structured datasets.
+
+The screenshots included in this repository demonstrate the analysis of a sample cloud cost dataset, showcasing the platform's profiling, reporting, visualization, and quality assessment capabilities.
+
+Example outputs include:
+
+- Cost Trend Analysis
+- Total Cost by Region
+- Total Cost by Service
+- Data Quality Reports
+- SQL Schema Generation
+
+---
+
+Database Integration:
+
+Oracle Database is used for:
+
+- Database connection
+- Automatic table creation
+- SQL schema execution
+- Bulk CSV data insertion
+- Data verification
+
+---
+
+Future Enhancements:
+
+- Interactive Streamlit dashboard
+- AWS / Azure / GCP cloud cost ingestion
+- Machine learning-based data quality prediction
+- Automated email reports
+- Real-time monitoring dashboard
+- REST API support
+- Support for multiple database systems (MySQL, PostgreSQL, SQL Server)
+
+---
+
+License:
+
+This project is licensed under the MIT License.
+
+---
+
+Author:
+
+Rishik Gosala
+
+B.Tech Information Technology Student
+
+Interests:
+
+- Cloud Computing
+- Data Analytics
+- Data Engineering
+- Python Development
+- SQL & Database Systems
+
+Feel free to fork this repository, raise issues, or contribute to the project.
